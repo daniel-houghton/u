@@ -12,7 +12,7 @@ echo 'curl -sL "https://raw.githubusercontent.com/daniel-houghton/u/main/r.sh" |
 
 
 # Create the install_ros.sh file to run after logging in to ubuntu desktop
-FILE_PATH="~/install_ros.sh"
+FILE_PATH="install_ros.sh"
 AUTHOR="Daniel Houghton"
 DATE=$(date +%Y-%m-%d)
 
