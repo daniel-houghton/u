@@ -43,13 +43,13 @@ echo 'deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/packages.microsoft
 rm packages.microsoft.gpg
 
 sudo apt update
-sudo apt install code
+sudo apt install code -y
 gsettings set org.gnome.desktop.peripherals.mouse natural-scroll true
 sudo apt purge libreoffice* thunderbird* rhythmbox* shotwell* totem* -y
 sudo apt autoremove -y
 rm -r Documents Downloads Music Pictures Public Templates Videos
 
-sudo apt install gh
+sudo apt install gh -y
 gh auth login
 gh repo clone daniel-houghton/scara
 
@@ -66,7 +66,7 @@ locale  # verify settings
 
 
 echo "--- 1.A Adding Universe ---"
-sudo apt install software-properties-common
+sudo apt install software-properties-common -y
 sudo add-apt-repository universe
 
 
@@ -108,18 +108,18 @@ source ~/.bashrc
 
 echo "---  Installing CycloneDDS ---"
 sudo apt update
-sudo apt install ros-$ROS_DISTRO-rmw-cyclonedds-cpp
+sudo apt install ros-$ROS_DISTRO-rmw-cyclonedds-cpp -y
 source ~/.bashrc
 
 
 # echo "---  Installing MoveIt ---"
 # sudo apt update
-# sudo apt install ros-$ROS_DISTRO-moveit
+# sudo apt install ros-$ROS_DISTRO-moveit -y
 # source ~/.bashrc
 
 echo "---  Installing ros2_control ---"
 sudo apt update
-sudo apt install ros-$ROS_DISTRO-ros2-control ros-$ROS_DISTRO-ros2-controllers
+sudo apt install ros-$ROS_DISTRO-ros2-control ros-$ROS_DISTRO-ros2-controllers -y
 source ~/.bashrc
 
 # End of Installation Script
