@@ -14,7 +14,7 @@ FILE_PATH="install_ros.sh"
 AUTHOR="Daniel Houghton"
 DATE=$(date +%Y-%m-%d)
 
-cat << EOF > "$FILE_PATH"
+cat << 'EOF' > "$FILE_PATH"
 #!/bin/bash
 # -----------------------------------
 # Ubuntu Installation Part 2
@@ -110,10 +110,11 @@ sudo apt install ros-$ROS_DISTRO-rmw-cyclonedds-cpp -y
 source ~/.bashrc
 
 
-# echo "---  Installing MoveIt ---"
+echo "---  Installing MoveIt ---"
 # sudo apt update
 # sudo apt install ros-$ROS_DISTRO-moveit -y
 # source ~/.bashrc
+
 
 echo "---  Installing ros2_control ---"
 sudo apt update
