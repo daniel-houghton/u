@@ -54,12 +54,8 @@ export ROS_DOMAIN_ID=0
 source ~/scara/install/setup.bash
 export QT_QPA_PLATFORM=xcb
 "
-if ! grep -Fq "$ROS_SETUP_LINE" ~/.bashrc; then
-    echo "$ROS_SETUP_LINE" >> ~/.bashrc
-    echo "Added ROS 2 sourcing to .bashrc"
-else
-    echo "ROS 2 sourcing already in .bashrc"
-fi
+echo "$ROS_SETUP_LINE" >> ~/.bashrc
+echo "Added ROS 2 sourcing to .bashrc"
 
 
 # Optional: Source for the current shell
