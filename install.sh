@@ -7,8 +7,6 @@ sudo apt update && sudo apt upgrade -y
 sudo apt install ubuntu-desktop -y
 sudo apt update && apt install spice-vdagent spice-webdavd -y
 
-echo 'curl -sL "https://raw.githubusercontent.com/daniel-houghton/u/main/r.sh" | sudo bash' >> ~/install.sh
-
 
 
 # Create the install_ros.sh file to run after logging in to ubuntu desktop
