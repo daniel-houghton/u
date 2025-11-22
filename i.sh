@@ -16,10 +16,9 @@ rm packages.microsoft.gpg
 
 sudo apt update
 sudo apt install code
-sudo apt purge libreoffice*
 gsettings set org.gnome.desktop.peripherals.mouse natural-scroll true
-sudo apt purge libreoffice* thunderbird* rhythmbox* shotwell* totem*
-sudo apt autoremove
+sudo apt purge libreoffice* thunderbird* rhythmbox* shotwell* totem* -y
+sudo apt autoremove -y
 rm -r Documents Downloads Music Pictures Public Templates Videos
 
 sudo reboot
