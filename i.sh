@@ -5,7 +5,7 @@ set -e
 sudo systemctl disable systemd-networkd-wait-online.service
 sudo apt update && sudo apt upgrade -y
 sudo apt install ubuntu-desktop -y
-sudo apt update && install spice-vdagent spice-webdavd -y
+sudo apt update && apt install spice-vdagent spice-webdavd -y
 
 sudo apt update
 sudo apt install wget gpg -y
