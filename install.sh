@@ -30,6 +30,12 @@ set -e
 
 gsettings set org.gnome.desktop.peripherals.mouse natural-scroll true
 
+sudo apt update
+sudo apt install -y terminator
+
+echo "Configuration file created successfully at $CONFIG_FILE"
+echo "Launch Terminator to see the new $LAYOUT_NAME layout."
+
 echo 'export BROWSER="/usr/bin/firefox"' >> ~/.bashrc
 source ~/.bashrc
 
@@ -109,17 +115,70 @@ sudo apt update
 sudo apt install ros-$ROS_DISTRO-rmw-cyclonedds-cpp -y
 source ~/.bashrc
 
+echo "---  Installing ros2_control ---"
+sudo apt update
+sudo apt install ros-$ROS_DISTRO-ros2-control ros-$ROS_DISTRO-ros2-controllers -y
+source ~/.bashrc
 
 echo "---  Installing MoveIt ---"
 # sudo apt update
 # sudo apt install ros-$ROS_DISTRO-moveit -y
 # source ~/.bashrc
-
-
-echo "---  Installing ros2_control ---"
 sudo apt update
-sudo apt install ros-$ROS_DISTRO-ros2-control ros-$ROS_DISTRO-ros2-controllers -y
+sudo apt install -y \
+  build-essential \
+  cmake \
+  git \
+  python3-colcon-common-extensions \
+  python3-flake8 \
+  python3-rosdep \
+  python3-setuptools \
+  python3-vcstool \
+  wget
+sudo apt update
+sudo apt dist-upgrade
 source ~/.bashrc
+sudo rosdep init
+rosdep update
+
+cd ~/scara/src/
+git clone https://github.com/moveit/moveit2.git -b $ROS_DISTRO
+for repo in moveit2/moveit2.repos $(f="moveit2/moveit2_$ROS_DISTRO.repos"; test -r $f && echo $f); do vcs import < "$repo"; done
+rosdep install -r --from-paths . --ignore-src --rosdistro $ROS_DISTRO -y
+#delete the unnecessary repos
+#update .gitignore for scara
+
+cd ~/scara/
+colcon build --event-handlers desktop_notification- status- --cmake-args -DCMAKE_BUILD_TYPE=Release
+source ~/.bashrc
+
+echo "---  Installing MoveIt Task Constructor---"
+cd ~/scara/src/
+git clone -b main https://github.com/moveit/moveit_task_constructor.git
+cd ~/scara/
+rosdep install --from-paths . --ignore-src --rosdistro $ROS_DISTRO
+colcon build --mixin release
+
+
+echo "---  Installing MoveIt Tutorials---"
+cd ~/scara/src/
+git clone https://github.com/moveit/moveit2_tutorials.git -b main
+cd ~/scara/
+rosdep install --from-paths src --ignore-src -r -y
+colcon build --packages-select moveit2_tutorials
+
+echo "---  Installing PickIK ---"
+cd ~/scara/src/
+git clone -b main https://github.com/PickNikRobotics/pick_ik.git
+
+sudo apt install -y librange-v3-dev
+sudo apt install -y python3-colcon-common-extensions
+sudo apt install -y python3-colcon-mixin
+colcon mixin add default https://raw.githubusercontent.com/colcon/colcon-mixin-repository/master/index.yaml
+colcon mixin update default
+
+cd ~/scara
+colcon build --mixin release
 
 # End of Installation Script
 EOF
